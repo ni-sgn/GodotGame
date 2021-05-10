@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://Fonts/Montserrat-Medium.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 59
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 43
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="MenuButton" parent="."]
+modulate = Color( 0.34902, 1, 0.419608, 1 )
+margin_left = 240.0
+margin_top = 182.168
+margin_right = 510.0
+margin_bottom = 261.168
+custom_fonts/font = SubResource( 1 )
+text = "Start"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="MenuButton" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+margin_left = 240.0
+margin_top = 293.724
+margin_right = 510.0
+margin_bottom = 352.724
+focus_mode = 2
+custom_fonts/font = SubResource( 2 )
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="button_down" from="Start" to="." method="_on_Start_button_down"]
+[connection signal="button_down" from="Quit" to="." method="_on_Quit_button_down"]

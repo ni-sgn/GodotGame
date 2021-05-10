@@ -1,0 +1,268 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://LevelPrefabs/Coin.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prefabs/CoinLabel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://LevelPrefabs/Door.tscn" type="PackedScene" id=4]
+
+[sub_resource type="ProceduralSky" id=1]
+
+[sub_resource type="Environment" id=2]
+background_mode = 1
+background_sky = SubResource( 1 )
+background_sky_orientation = Basis( -0.532581, 0, 0.846379, 0, 1, 0, -0.846379, 0, -0.532581 )
+background_sky_rotation = Vector3( 0, 2.13244, 0 )
+background_sky_rotation_degrees = Vector3( 0, 122.18, 0 )
+background_color = Color( 0.709804, 0.231373, 0.976471, 1 )
+background_energy = 0.0
+
+[sub_resource type="CubeMesh" id=3]
+
+[sub_resource type="BoxShape" id=4]
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.168627, 0.839216, 0.839216, 1 )
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.168627, 0.839216, 0.839216, 1 )
+
+[sub_resource type="CubeMesh" id=7]
+
+[sub_resource type="BoxShape" id=8]
+margin = 0.001
+
+[node name="Node" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.415, 0 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.735246, -0.586992, 0.3389, 0, 0.5, 0.866025, -0.6778, -0.636742, 0.367623, 0, 6, 0 )
+light_color = Color( 1, 0.972549, 0.854902, 1 )
+shadow_enabled = true
+shadow_color = Color( 0.266667, 0.388235, 0.415686, 1 )
+shadow_bias = 1.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="Control" parent="." instance=ExtResource( 3 )]
+
+[node name="WorldStatic" type="Spatial" parent="."]
+
+[node name="cube" type="StaticBody" parent="WorldStatic"]
+transform = Transform( 1, 0, 0, 0, 0.5, 0, 0, 0, 1, 1, 0, -5 )
+
+[node name="MeshInstance" type="MeshInstance" parent="WorldStatic/cube"]
+use_in_baked_light = true
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="WorldStatic/cube"]
+shape = SubResource( 4 )
+
+[node name="cube2" type="StaticBody" parent="WorldStatic"]
+transform = Transform( 1, 0, 0, 0, 0.686, 0, 0, 0, 1, 4, 0, -5 )
+
+[node name="MeshInstance" type="MeshInstance" parent="WorldStatic/cube2"]
+use_in_baked_light = true
+mesh = SubResource( 3 )
+material/0 = SubResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="WorldStatic/cube2"]
+shape = SubResource( 4 )
+
+[node name="cube6" type="StaticBody" parent="WorldStatic"]
+transform = Transform( 0.3, 0, 0, 0, 1.18541, 0, 0, 0, 1, 4, 1, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="WorldStatic/cube6"]
+use_in_baked_light = true
+mesh = SubResource( 3 )
+material/0 = SubResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="WorldStatic/cube6"]
+shape = SubResource( 4 )
+
+[node name="cube3" type="StaticBody" parent="WorldStatic"]
+transform = Transform( 1, 0, 0, 0, 0.282358, 0, 0, 0, 1, -2, 0, -5 )
+
+[node name="MeshInstance" type="MeshInstance" parent="WorldStatic/cube3"]
+use_in_baked_light = true
+mesh = SubResource( 3 )
+material/0 = SubResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="WorldStatic/cube3"]
+shape = SubResource( 4 )
+
+[node name="cube4" type="StaticBody" parent="WorldStatic"]
+transform = Transform( 1, 0, 0, 0, 0.0797258, 0, 0, 0, 1, -4, 0, -10 )
+
+[node name="MeshInstance" type="MeshInstance" parent="WorldStatic/cube4"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="WorldStatic/cube4"]
+shape = SubResource( 4 )
+
+[node name="cube9" type="StaticBody" parent="WorldStatic"]
+transform = Transform( 1, 0, 0, 0, 0.261332, 0, 0, 0, 0.414391, -6.81158, -0.835296, -2.49064 )
+
+[node name="MeshInstance" type="MeshInstance" parent="WorldStatic/cube9"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="WorldStatic/cube9"]
+shape = SubResource( 4 )
+
+[node name="cube10" type="StaticBody" parent="WorldStatic"]
+transform = Transform( 1, 0, 0, 0, 0.261332, 0, 0, 0, 0.414391, -6.81158, -0.67529, -3.09688 )
+
+[node name="MeshInstance" type="MeshInstance" parent="WorldStatic/cube10"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="WorldStatic/cube10"]
+shape = SubResource( 4 )
+
+[node name="cube11" type="StaticBody" parent="WorldStatic"]
+transform = Transform( 1, 0, 0, 0, 0.261332, 0, 0, 0, 0.414391, -6.81158, -0.524019, -3.56307 )
+
+[node name="MeshInstance" type="MeshInstance" parent="WorldStatic/cube11"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="WorldStatic/cube11"]
+shape = SubResource( 4 )
+
+[node name="cube12" type="StaticBody" parent="WorldStatic"]
+transform = Transform( 1, 0, 0, 0, 0.261332, 0, 0, 0, 0.414391, -6.81158, -0.386649, -3.97087 )
+
+[node name="MeshInstance" type="MeshInstance" parent="WorldStatic/cube12"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="WorldStatic/cube12"]
+shape = SubResource( 4 )
+
+[node name="cube13" type="StaticBody" parent="WorldStatic"]
+transform = Transform( 1, 0, 0, 0, 0.261332, 0, 0, 0, 0.414391, -6.81158, -0.22929, -4.38879 )
+
+[node name="MeshInstance" type="MeshInstance" parent="WorldStatic/cube13"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="WorldStatic/cube13"]
+shape = SubResource( 4 )
+
+[node name="cube14" type="StaticBody" parent="WorldStatic"]
+transform = Transform( 1, 0, 0, 0, 0.261332, 0, 0, 0, 0.414391, -6.81158, -0.0498666, -4.79841 )
+
+[node name="MeshInstance" type="MeshInstance" parent="WorldStatic/cube14"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="WorldStatic/cube14"]
+shape = SubResource( 4 )
+
+[node name="cube15" type="StaticBody" parent="WorldStatic"]
+transform = Transform( 1, 0, 0, 0, 0.261332, 0, 0, 0, 0.414391, -6.81158, 0.0638156, -5.18458 )
+
+[node name="MeshInstance" type="MeshInstance" parent="WorldStatic/cube15"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="WorldStatic/cube15"]
+shape = SubResource( 4 )
+
+[node name="cube16" type="StaticBody" parent="WorldStatic"]
+transform = Transform( 1, 0, 0, 0, 0.261332, 0, 0, 0, 0.414391, -6.81158, 0.223822, -5.79082 )
+
+[node name="MeshInstance" type="MeshInstance" parent="WorldStatic/cube16"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="WorldStatic/cube16"]
+shape = SubResource( 4 )
+
+[node name="cube17" type="StaticBody" parent="WorldStatic"]
+transform = Transform( 1, 0, 0, 0, 0.261332, 0, 0, 0, 0.414391, -6.81158, 0.375092, -6.25701 )
+
+[node name="MeshInstance" type="MeshInstance" parent="WorldStatic/cube17"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="WorldStatic/cube17"]
+shape = SubResource( 4 )
+
+[node name="cube18" type="StaticBody" parent="WorldStatic"]
+transform = Transform( 1, 0, 0, 0, 0.261332, 0, 0, 0, 0.414391, -6.81158, 0.512462, -6.66481 )
+
+[node name="MeshInstance" type="MeshInstance" parent="WorldStatic/cube18"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="WorldStatic/cube18"]
+shape = SubResource( 4 )
+
+[node name="cube19" type="StaticBody" parent="WorldStatic"]
+transform = Transform( 1, 0, 0, 0, 0.261332, 0, 0, 0, 0.414391, -6.81158, 0.669821, -7.08273 )
+
+[node name="MeshInstance" type="MeshInstance" parent="WorldStatic/cube19"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="WorldStatic/cube19"]
+shape = SubResource( 4 )
+
+[node name="cube20" type="StaticBody" parent="WorldStatic"]
+transform = Transform( 1, 0, 0, 0, 0.261332, 0, 0, 0, 0.414391, -6.81158, 0.849245, -7.49235 )
+
+[node name="MeshInstance" type="MeshInstance" parent="WorldStatic/cube20"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="WorldStatic/cube20"]
+shape = SubResource( 4 )
+
+[node name="cube5" type="StaticBody" parent="WorldStatic"]
+transform = Transform( 5.40918, 0.121799, 0, -1.44939, 0.454561, 0, 0, 0, 1, 8, 0, -10 )
+
+[node name="MeshInstance" type="MeshInstance" parent="WorldStatic/cube5"]
+mesh = SubResource( 3 )
+material/0 = SubResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="WorldStatic/cube5"]
+shape = SubResource( 4 )
+
+[node name="floor" type="StaticBody" parent="WorldStatic"]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -1, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="WorldStatic/floor"]
+transform = Transform( 5.72, 0, 0, 0, 0.2, 0, 0, 0, 6.6, 0, 0, 0 )
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="WorldStatic/floor"]
+transform = Transform( 5.72, 0, 0, 0, 0.2, 0, 0, 0, 6.6, 0, 0, 0 )
+shape = SubResource( 8 )
+
+[node name="Interactables" type="Spatial" parent="."]
+
+[node name="Coins" type="Spatial" parent="Interactables"]
+
+[node name="Spatial3" parent="Interactables/Coins" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2613, 3.50099, -2.0877 )
+
+[node name="Spatial2" parent="Interactables/Coins" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.17462, 0.441468, -8.85643 )
+
+[node name="Spatial" parent="Interactables/Coins" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.392145, 1.27133, -5.24382 )
+
+[node name="doors" type="Spatial" parent="Interactables"]
+
+[node name="Door" parent="Interactables/doors" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -0.7, 0 )
+
+[node name="Door2" parent="Interactables/doors" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -0.7, 6.19931 )

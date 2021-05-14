@@ -8,7 +8,7 @@ func _ready():
 
 
 
-func _on_Interact(switch):
+func _on_Interact(switch, PlayerBody):
 	if(switch): 
 		if InternalState == false:
 			InternalState = true;
@@ -17,9 +17,7 @@ func _on_Interact(switch):
 		
 	if (InternalState):
 		get_node("Hinge").rotation.y = deg2rad(90);
-		print("opened")
 	else:
 		get_node("Hinge").rotation.y = -deg2rad(0);
-		print("closed")
 	
 	pass

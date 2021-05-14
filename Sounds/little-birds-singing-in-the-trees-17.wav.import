@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/little-birds-singing-in-the-trees-17.wav-9836b04ffd97ed2f27b578f9dee14cf9.sample"
+
+[deps]
+
+source_file="res://Sounds/little-birds-singing-in-the-trees-17.wav"
+dest_files=[ "res://.import/little-birds-singing-in-the-trees-17.wav-9836b04ffd97ed2f27b578f9dee14cf9.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,9 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://LevelPrefabs/Coin.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/CoinLabel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://LevelPrefabs/Door.tscn" type="PackedScene" id=4]
+[ext_resource path="res://JungleSounds.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Pickable.tscn" type="PackedScene" id=6]
 
 [sub_resource type="ProceduralSky" id=1]
 
@@ -13,8 +15,9 @@ background_sky = SubResource( 1 )
 background_sky_orientation = Basis( -0.532581, 0, 0.846379, 0, 1, 0, -0.846379, 0, -0.532581 )
 background_sky_rotation = Vector3( 0, 2.13244, 0 )
 background_sky_rotation_degrees = Vector3( 0, 122.18, 0 )
-background_color = Color( 0.709804, 0.231373, 0.976471, 1 )
+background_color = Color( 0.615686, 0.596078, 0.705882, 1 )
 background_energy = 0.0
+ambient_light_energy = 0.0
 
 [sub_resource type="CubeMesh" id=3]
 
@@ -30,6 +33,35 @@ albedo_color = Color( 0.168627, 0.839216, 0.839216, 1 )
 
 [sub_resource type="BoxShape" id=8]
 margin = 0.001
+
+[sub_resource type="SphereMesh" id=9]
+
+[sub_resource type="Shader" id=10]
+code = "shader_type spatial;
+
+void vertex() {
+  VERTEX.xyz -= cos(VERTEX.x) * sin(VERTEX.z) * cos(TIME);
+  VERTEX.xyz += cos(VERTEX.x) * sin(VERTEX.z) * cos(TIME);
+}
+
+void fragment()
+{
+	ALBEDO.r += sin(pow(TIME,2)) ;
+	ALBEDO.g -= cos(pow(TIME,2));
+	SPECULAR = TIME;
+	METALLIC += sin(TIME) ;
+}"
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = SubResource( 10 )
+
+[sub_resource type="SphereMesh" id=12]
+
+[sub_resource type="SpatialMaterial" id=13]
+params_diffuse_mode = 4
+params_specular_mode = 3
+albedo_color = Color( 0.14902, 0.305882, 0.313726, 1 )
+roughness = 0.09
 
 [node name="Node" type="Node"]
 
@@ -235,7 +267,9 @@ material/0 = SubResource( 5 )
 shape = SubResource( 4 )
 
 [node name="floor" type="StaticBody" parent="WorldStatic"]
-transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -1, 0 )
+transform = Transform( 6.50513, 0, 0, 0, 0.0330947, 0, 0, 0, 9.20584, 0, -1, 0 )
+collision_layer = 5
+collision_mask = 5
 
 [node name="MeshInstance" type="MeshInstance" parent="WorldStatic/floor"]
 transform = Transform( 5.72, 0, 0, 0, 0.2, 0, 0, 0, 6.6, 0, 0, 0 )
@@ -251,7 +285,7 @@ shape = SubResource( 8 )
 [node name="Coins" type="Spatial" parent="Interactables"]
 
 [node name="Spatial3" parent="Interactables/Coins" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2613, 3.50099, -2.0877 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.439251, 2.93495, -2.41291 )
 
 [node name="Spatial2" parent="Interactables/Coins" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.17462, 0.441468, -8.85643 )
@@ -266,3 +300,21 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -0.7, 0 )
 
 [node name="Door2" parent="Interactables/doors" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -0.7, 6.19931 )
+
+[node name="JungleSounds" parent="." instance=ExtResource( 5 )]
+transform = Transform( 36.6821, 0, 0, 0, 1, 0, 0, 0, 39.2802, 0, 0, 0 )
+
+[node name="TestingNode" type="Node" parent="."]
+
+[node name="ShaderTestMesh" type="MeshInstance" parent="TestingNode"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.959, 0.838949, 4.92243 )
+mesh = SubResource( 9 )
+material/0 = SubResource( 11 )
+
+[node name="MeshInstance" type="MeshInstance" parent="TestingNode"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.13323, 0.906456, 8.02218 )
+mesh = SubResource( 12 )
+material/0 = SubResource( 13 )
+
+[node name="Spatial" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0.620024, 0, 0, 0, 0.637709, 0, 0, 0, 0.595296, 0, 1.43935, 2.7646 )

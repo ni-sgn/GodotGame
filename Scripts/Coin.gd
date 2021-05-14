@@ -21,3 +21,6 @@ func _on_Area_body_entered(body):
 func Anim_End():
 	KinBod.CoinCount +=1;
 	self.queue_free();
+
+func Anim_Start():
+	$AudioStreamPlayer.play(self.transform.origin.x);

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/PlayerBody.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/Montserrat-Light.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Themes/Fonts/Montserrat-Black.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.46
@@ -12,7 +13,52 @@ outline_size = 6
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
-[sub_resource type="RayShape" id=3]
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 0, 0, 0 )
+draw_center = false
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color( 0, 0.564706, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 1, 0.905882, 0.223529, 1 )
+border_color = Color( 0, 0.403922, 1, 1 )
+
+[sub_resource type="Theme" id=5]
+ProgressBar/colors/font_color = Color( 0, 0, 0, 1 )
+ProgressBar/colors/font_color_shadow = Color( 0, 0, 0, 1 )
+ProgressBar/fonts/font = null
+ProgressBar/styles/bg = SubResource( 3 )
+ProgressBar/styles/fg = SubResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.670588, 0, 0, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.843137, 0.890196, 0, 1 )
+corner_radius_top_left = 11
+corner_radius_top_right = 11
+corner_radius_bottom_right = 11
+corner_radius_bottom_left = 11
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.776471, 0.309804, 0.309804, 1 )
+corner_radius_top_left = 11
+corner_radius_top_right = 11
+corner_radius_bottom_right = 11
+corner_radius_bottom_left = 11
+
+[sub_resource type="DynamicFont" id=9]
+size = 64
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
 
 [node name="Player" type="Spatial"]
 
@@ -28,16 +74,17 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
 shape = SubResource( 1 )
 
 [node name="Camera" type="Camera" parent="PlayerBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0 )
 keep_aspect = 0
-current = true
 fov = 100.0
+frustum_offset = Vector2( 3.725, 0.071 )
+near = 0.01
 
 [node name="Label" type="Label" parent="PlayerBody"]
-margin_left = 200.0
-margin_top = 500.0
-margin_right = 549.0
-margin_bottom = 546.0
+margin_left = 238.376
+margin_top = 450.884
+margin_right = 587.376
+margin_bottom = 496.884
 custom_fonts/font = SubResource( 2 )
 text = "Press 'F' to interact"
 align = 1
@@ -46,6 +93,38 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RayShape" type="CollisionShape" parent="PlayerBody"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.261308, 0 )
-shape = SubResource( 3 )
+[node name="Stamina" type="ProgressBar" parent="PlayerBody"]
+anchor_right = 0.206
+margin_top = 497.0
+margin_right = 179.2
+margin_bottom = 544.0
+theme = SubResource( 5 )
+value = 98.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="PlayerBody"]
+visible = false
+margin_right = 800.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="PlayerBody/Control"]
+margin_left = 296.0
+margin_top = 216.0
+margin_right = 480.0
+margin_bottom = 296.0
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="PlayerBody/Control/Quit" to="PlayerBody" method="_on_Quit_pressed"]

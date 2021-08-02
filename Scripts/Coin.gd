@@ -19,7 +19,7 @@ func _on_Area_body_entered(body):
 	pass # Replace with function body.
 
 func Anim_End():
-	KinBod.CoinCount +=1;
+	KinBod.CoinCount +=1; 
 	self.queue_free();
 
 func Anim_Start():

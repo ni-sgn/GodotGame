@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Models/Guns/untitled.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://Scripts/PistolScript.gd" type="Script" id=2]
+[ext_resource path="res://Prefabs/Interactive.tscn" type="PackedScene" id=3]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.0516302, 0.162029, 0.245715 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.333333, 0.317647, 0.317647, 1 )
+metallic = 0.42
+metallic_specular = 0.89
+
+[node name="PistolPickable" type="Spatial"]
+
+[node name="body" type="RigidBody" parent="." groups=[
+"bodies",
+]]
+mass = 100.0
+can_sleep = false
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="body"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00852978, -0.0591163, 0.0296651 )
+shape = SubResource( 1 )
+
+[node name="untitled" type="MeshInstance" parent="body"]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.000138015, 0.000206128, 0.000260651 )
+mesh = ExtResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Interactive" parent="body" instance=ExtResource( 3 )]
